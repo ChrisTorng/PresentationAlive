@@ -7,6 +7,25 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" Click="Button_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="80"/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox x:Name="playList" Grid.Column="0" />
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Content="Start" Click="ButtonStart_Click"/>
+            <Button Grid.Row="1" Content="Next" Click="ButtonNext_Click"/>
+        </Grid>
+        
+        
     </Grid>
 </Window>

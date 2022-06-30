@@ -19,15 +19,17 @@ namespace src
             InitializeComponent();
             this.Closing += MainWindow_Closing;
 
-            this.app = new();
-            //{
-            //    WindowState = PpWindowState.ppWindowMinimized,
-            //    Visible = MsoTriState.msoTrue
-            //};
+            this.app = new()
+            {
+               Visible = MsoTriState.msoTrue,
+               WindowState = PpWindowState.ppWindowMinimized,
+            };
             app.SlideShowEnd += this.App_SlideShowEnd;
 
-            this.playList.Items.Add("D:\\Users\\ChrisTorng\\Documents\\個人\\教會\\UP\\20220213\\恢復起初的愛-欣仁版本 - Copy.pptx");
-            this.playList.Items.Add("D:\\Users\\ChrisTorng\\Documents\\個人\\教會\\UP\\20220213\\恢復起初的愛 - Copy.pptx");
+            // this.playList.Items.Add(@"D:\Users\ChrisTorng\Documents\個人\教會\UP\20220213\恢復起初的愛-欣仁版本 - Copy.pptx");
+            // this.playList.Items.Add(@"D:\Users\ChrisTorng\Documents\個人\教會\UP\20220213\恢復起初的愛 - Copy.pptx");
+            this.playList.Items.Add(@"C:\Users\ChrisTorng\Documents\Personal\Chris\UP church\20210807 新的事將要成就 - Copy.pptx");
+            this.playList.Items.Add(@"C:\Users\ChrisTorng\Documents\Personal\Chris\UP church\20210807 新的事將要成就寬螢幕彩色背景 - Copy.pptx");
             this.playList.SelectedIndex = 0;
         }
 
@@ -51,7 +53,6 @@ namespace src
             {
                 this.presentation = app.Presentations.Open(this.playList.SelectedItem.ToString());
                 var slideShowSettings = presentation.SlideShowSettings;
-                //slideShowSettings.EndingSlide--;
                 slideShowSettings.Run();
             }
         }
@@ -61,11 +62,13 @@ namespace src
             this.presentation?.Close();
             this.presentation = null;
 
-            if (this.playList.SelectedIndex < this.playList.Items.Count - 1)
-            {
-                this.playList.SelectedIndex++;
-                this.StartSlideShow();
-            }
+            Dispatcher.Invoke(() => {
+                if (this.playList.SelectedIndex < this.playList.Items.Count - 1)
+                {
+                    this.playList.SelectedIndex++;
+                    this.StartSlideShow();
+                }
+            });
         }
 
         private void ButtonNext_Click(object sender, RoutedEventArgs e)

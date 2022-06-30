@@ -3,8 +3,9 @@
     "tasks": [
         {
             "label": "build",
-            "command":"C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\MSBuild.exe",
+            // "command":"C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\MSBuild.exe",
             // "command":"C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe",
+            "command":"C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe",
             "type":"shell",
             "args":[
                 "src\\PresentationAlive.csproj",

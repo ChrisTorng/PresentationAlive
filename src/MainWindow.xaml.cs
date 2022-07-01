@@ -9,6 +9,8 @@ namespace PresentationAlive;
 
 public partial class MainWindow : Window
 {
+    List<IItem> items;
+
     PowerPointApp app;
     Presentation? presentation;
 
@@ -24,8 +26,17 @@ public partial class MainWindow : Window
         };
         app.SlideShowEnd += this.App_SlideShowEnd;
 
-        this.playList.Items.Add(GetFullPath(@"..\data\ppt\a.pptx"));
-        this.playList.Items.Add(GetFullPath(@"..\data\ppt\b.pptx"));
+        this.items = new()
+        {
+            new PowerPointItem("A", GetFullPath(@"..\data\ppt\a.pptx")),
+            new PowerPointItem("B", GetFullPath(@"..\data\ppt\b.pptx")),
+        };
+
+        foreach (var item in this.items)
+        {
+            this.playList.Items.Add(item.ToString());
+        }
+
         this.playList.SelectedIndex = 0;
     }
 
@@ -43,14 +54,14 @@ public partial class MainWindow : Window
 
     private void ButtonStart_Click(object sender, RoutedEventArgs e)
     {
-        this.StartSlideShow();
+        this.StartSlideShow(this.items[0] as PowerPointItem);
     }
 
-    private void StartSlideShow()
+    private void StartSlideShow(PowerPointItem item)
     {
         if (this.playList.SelectedItem != null)
         {
-            this.presentation = app.Presentations.Open(this.playList.SelectedItem.ToString());
+            this.presentation = app.Presentations.Open(item.Path);
             var slideShowSettings = presentation.SlideShowSettings;
             slideShowSettings.Run();
         }
@@ -63,10 +74,10 @@ public partial class MainWindow : Window
 
         Dispatcher.Invoke(() =>
         {
-            if (this.playList.SelectedIndex < this.playList.Items.Count - 1)
+            if (this.playList.SelectedIndex < this.items.Count - 1)
             {
                 this.playList.SelectedIndex++;
-                this.StartSlideShow();
+                this.StartSlideShow(this.items[this.playList.SelectedIndex] as PowerPointItem);
             }
         });
     }

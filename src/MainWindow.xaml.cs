@@ -5,7 +5,7 @@ using Microsoft.Office.Core;
 using Microsoft.Office.Interop.PowerPoint;
 using PowerPointApp = Microsoft.Office.Interop.PowerPoint.Application;
 
-namespace src
+namespace PresentationAlive
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

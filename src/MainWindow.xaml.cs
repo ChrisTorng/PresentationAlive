@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.PowerPoint;
@@ -26,12 +27,13 @@ namespace src
             };
             app.SlideShowEnd += this.App_SlideShowEnd;
 
-            // this.playList.Items.Add(@"D:\Users\ChrisTorng\Documents\個人\教會\UP\20220213\恢復起初的愛-欣仁版本 - Copy.pptx");
-            // this.playList.Items.Add(@"D:\Users\ChrisTorng\Documents\個人\教會\UP\20220213\恢復起初的愛 - Copy.pptx");
-            this.playList.Items.Add(@"C:\Users\ChrisTorng\Documents\Personal\Chris\UP church\20210807 新的事將要成就 - Copy.pptx");
-            this.playList.Items.Add(@"C:\Users\ChrisTorng\Documents\Personal\Chris\UP church\20210807 新的事將要成就寬螢幕彩色背景 - Copy.pptx");
+            this.playList.Items.Add(GetFullPath(@"..\data\ppt\a.pptx"));
+            this.playList.Items.Add(GetFullPath(@"..\data\ppt\b.pptx"));
             this.playList.SelectedIndex = 0;
         }
+
+        private static string GetFullPath(string file) =>
+            Path.Combine(Directory.GetCurrentDirectory(), file);
 
         private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
         {

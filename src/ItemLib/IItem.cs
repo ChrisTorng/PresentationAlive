@@ -1,4 +1,4 @@
-namespace PresentationAlive;
+namespace PresentationAlive.ItemLib;
 
 public interface IItem
 {

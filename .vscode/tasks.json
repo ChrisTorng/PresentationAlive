@@ -5,14 +5,26 @@
             "label": "build",
             // "command":"C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe",
             "command":"C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\MSBuild\\Current\\Bin\\amd64\\MSBuild.exe",
-            "type":"shell",
+            "type":"process",
             "args":[
                 "src\\PresentationAlive.csproj",
                 // "/t:Build",
                 // "/p:Configuration=Debug",
                 // "/p:Platform=\"AnyCPU\""
             ]
-        }
+        },
+        // {
+        //     "label": "build-ItemLib",
+        //     "command": "dotnet",
+        //     "type": "process",
+        //     "args": [
+        //         "build",
+        //         "${workspaceFolder}/src/ItemLib.csproj",
+        //         "/property:GenerateFullPaths=true",
+        //         "/consoleloggerparameters:NoSummary"
+        //     ],
+        //     "problemMatcher": "$msCompile"
+        // },
         // {
         //     "label": "build",
         //     "command": "dotnet",
@@ -25,29 +37,29 @@
         //     ],
         //     "problemMatcher": "$msCompile"
         // },
-        // {
-        //     "label": "publish",
-        //     "command": "dotnet",
-        //     "type": "process",
-        //     "args": [
-        //         "publish",
-        //         "${workspaceFolder}/src/PresentationAlive.csproj",
-        //         "/property:GenerateFullPaths=true",
-        //         "/consoleloggerparameters:NoSummary"
-        //     ],
-        //     "problemMatcher": "$msCompile"
-        // },
-        // {
-        //     "label": "watch",
-        //     "command": "dotnet",
-        //     "type": "process",
-        //     "args": [
-        //         "watch",
-        //         "run",
-        //         "--project",
-        //         "${workspaceFolder}/src/PresentationAlive.csproj"
-        //     ],
-        //     "problemMatcher": "$msCompile"
-        // }
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/src/PresentationAlive.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/src/PresentationAlive.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
     ]
 }

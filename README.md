@@ -6,6 +6,7 @@ Visual Studio 2022 required and recommended.
 
 ## How to build in Visual Studio Code
 * Open "Developer Command Prompt for VS 2022"
+* `cd` to `PresentationAlive\src`
 * Run `dotnet build` for restore NuGet library. It will fail, that's ok
 * Run `where msbuild` to get the MSBuild.exe path to Visual Studio\2022
 * Update `tasks.json`'s `command` path

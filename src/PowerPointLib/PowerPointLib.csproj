@@ -44,6 +44,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\itemLib\ItemLib.csproj" />
+	  <ProjectReference Include="..\ItemLib\ItemLib.csproj" />
 	</ItemGroup>
 </Project>

@@ -13,8 +13,12 @@
     <AnalysisMode>All</AnalysisMode>
   </PropertyGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\ItemLib\ItemLib.csproj" />
+	</ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="PowerPointLib\PowerPointLib.csproj" />
+    <ProjectReference Include="..\PowerPointLib\PowerPointLib.csproj" />
   </ItemGroup>
 
 </Project>

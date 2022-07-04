@@ -16,8 +16,8 @@ public partial class MainWindow : Window
 
         this.items = new()
         {
-            new PowerPointItem("A", GetFullPath(@"..\data\ppt\a.pptx")),
-            new PowerPointItem("B", GetFullPath(@"..\data\ppt\b.pptx")),
+            new PowerPointItem("A", GetFullPath(@"data\a.pptx")),
+            new PowerPointItem("B", GetFullPath(@"data\b.pptx")),
         };
 
         foreach (var item in this.items)

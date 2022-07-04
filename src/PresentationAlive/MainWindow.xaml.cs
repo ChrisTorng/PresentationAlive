@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Threading;
 using PresentationAlive.ItemLib;
 using PresentationAlive.PowerPointLib;
 
@@ -13,6 +14,9 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         this.InitializeComponent();
+        this.Closed += MainWindow_Closed;
+
+        PowerPointItem.Open();
 
         this.items = new()
         {
@@ -27,6 +31,11 @@ public partial class MainWindow : Window
         }
 
         this.playList.SelectedIndex = 0;
+    }
+
+    private void MainWindow_Closed(object? sender, EventArgs e)
+    {
+        PowerPointItem.Close();
     }
 
     private static string GetFullPath(string file) =>
@@ -57,6 +66,13 @@ public partial class MainWindow : Window
 
     private void Item_Stopped(object? sender, EventArgs eventArgs)
     {
-        Dispatcher.Invoke(() => this.GetItem()?.Close());
+        Dispatcher.Invoke(() =>
+        {
+            if (this.playList.SelectedIndex < this.playList.Items.Count - 1)
+            {
+                this.playList.SelectedIndex++;
+                this.GetItem()?.Start();
+            }
+        });
     }
 }

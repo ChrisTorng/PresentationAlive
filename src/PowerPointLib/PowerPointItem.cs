@@ -47,7 +47,7 @@ public class PowerPointItem : IItem
 
         app.SlideShowEnd += this.App_SlideShowEnd;
 
-        this.presentation = app.Presentations.Open(this.Path);
+        this.presentation = app.Presentations.Open(this.Path, WithWindow: MsoTriState.msoFalse);
         var slideShowSettings = presentation.SlideShowSettings;
         slideShowSettings.Run();
     }

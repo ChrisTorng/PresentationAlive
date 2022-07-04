@@ -46,9 +46,11 @@ public class PowerPointItem : IItem
         ArgumentNullException.ThrowIfNull(app);
 
         app.SlideShowEnd += this.App_SlideShowEnd;
+        //app.SlideShowNextSlide += this.App_SlideShowNextSlide;
 
         this.presentation = app.Presentations.Open(this.Path, WithWindow: MsoTriState.msoFalse);
         var slideShowSettings = presentation.SlideShowSettings;
+        slideShowSettings.ShowWithAnimation = MsoTriState.msoTrue;
         slideShowSettings.Run();
     }
 
@@ -59,6 +61,15 @@ public class PowerPointItem : IItem
 
         this.presentation.SlideShowWindow.View.Next();
     }
+
+    //private void App_SlideShowNextSlide(SlideShowWindow Wn)
+    //{
+    //    if (Wn.View.Slide.SlideNumber >= this.presentation?.Slides.Count)
+    //    {
+    //        this.Stop();
+    //        this.Stopped?.Invoke(this, new EventArgs());
+    //    }
+    //}
 
     private void App_SlideShowEnd(Presentation Pres)
     {
@@ -71,6 +82,7 @@ public class PowerPointItem : IItem
         if (app != null)
         {
             app.SlideShowEnd -= this.App_SlideShowEnd;
+            //app.SlideShowNextSlide -= this.App_SlideShowNextSlide;
         }
 
         this.presentation?.Close();

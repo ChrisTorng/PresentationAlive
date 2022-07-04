@@ -52,6 +52,7 @@ public partial class MainWindow : Window
         if (this.playList.SelectedIndex >= 0)
         {
             this.GetItem()?.Start();
+            this.Activate();
         }
     }
 
@@ -78,6 +79,7 @@ public partial class MainWindow : Window
             {
                 this.playList.SelectedIndex++;
                 this.GetItem()?.Start();
+                this.Activate();
             }
         });
     }

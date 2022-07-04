@@ -35,6 +35,12 @@ public partial class MainWindow : Window
 
     private void MainWindow_Closed(object? sender, EventArgs e)
     {
+        foreach (var item in this.items)
+        {
+            item.Stopped -= this.Item_Stopped;
+            item.Stop();
+        }
+
         PowerPointItem.Close();
     }
 

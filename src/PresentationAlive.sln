@@ -1,21 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32611.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationAlive", "PresentationAlive\PresentationAlive.csproj", "{7B3A24C0-21EA-42A1-9E15-CE9EFA31CE91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PresentationAlive", "PresentationAlive\PresentationAlive.csproj", "{7B3A24C0-21EA-42A1-9E15-CE9EFA31CE91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerPointLib", "PowerPointLib\PowerPointLib.csproj", "{C40B48CE-ED7C-4482-BBAF-66FF1CC81261}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerPointLib", "PowerPointLib\PowerPointLib.csproj", "{C40B48CE-ED7C-4482-BBAF-66FF1CC81261}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemLib", "ItemLib\ItemLib.csproj", "{ED877CC3-B9EB-4291-ACA0-B1CF39DB1860}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItemLib", "ItemLib\ItemLib.csproj", "{ED877CC3-B9EB-4291-ACA0-B1CF39DB1860}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{10ACF369-CF29-4F66-90A0-885856A5A939}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7B3A24C0-21EA-42A1-9E15-CE9EFA31CE91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -30,5 +34,11 @@ Global
 		{ED877CC3-B9EB-4291-ACA0-B1CF39DB1860}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED877CC3-B9EB-4291-ACA0-B1CF39DB1860}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED877CC3-B9EB-4291-ACA0-B1CF39DB1860}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B1070D1-B458-4701-AAEC-97D6729910C6}
 	EndGlobalSection
 EndGlobal

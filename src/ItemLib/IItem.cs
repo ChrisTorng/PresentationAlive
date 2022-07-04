@@ -6,11 +6,15 @@ public interface IItem
 
     string DisplayName { get; }
 
+    static void Open() { }
+
     void Start();
 
     void Next();
 
     event EventHandler Stopped;
 
-    void Close();
+    void Stop();
+
+    static void Close() { }
 }

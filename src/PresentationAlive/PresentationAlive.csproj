@@ -13,12 +13,20 @@
     <AnalysisMode>All</AnalysisMode>
   </PropertyGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\ItemLib\ItemLib.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\ItemLib\ItemLib.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PowerPointLib\PowerPointLib.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <AssetsSourceFiles Include="../../data/**/*.*"/>
+  </ItemGroup>
+
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="@(AssetsSourceFiles)" DestinationFolder="$(OutDir)/data/" SkipUnchangedFiles="true" />
+  </Target>
 
 </Project>

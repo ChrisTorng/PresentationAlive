@@ -2,12 +2,13 @@
 using System.IO;
 using System.Windows;
 using PresentationAlive.ItemLib;
+using PresentationAlive.PowerPointLib;
 
 namespace PresentationAlive;
 
 public partial class MainWindow : Window
 {
-    List<IItem> items;
+    private readonly List<IItem> items;
 
     public MainWindow()
     {
@@ -35,11 +36,11 @@ public partial class MainWindow : Window
     {
         if (this.playList.SelectedIndex >= 0)
         {
-            this.GetItem().Start();
+            this.GetItem()?.Start();
         }
     }
 
-    private IItem GetItem()
+    private IItem? GetItem()
     {
         var item = this.items[this.playList.SelectedIndex];
         return item.ItemType switch
@@ -51,11 +52,11 @@ public partial class MainWindow : Window
 
     private void ButtonNext_Click(object sender, RoutedEventArgs e)
     {
-        this.GetItem().Next();
+        this.GetItem()?.Next();
     }
 
     private void Item_Stopped(object? sender, EventArgs eventArgs)
     {
-        Dispatcher.Invoke(() => this.GetItem().Close());
+        Dispatcher.Invoke(() => this.GetItem()?.Close());
     }
 }

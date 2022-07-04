@@ -1,5 +1,6 @@
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.PowerPoint;
+using PresentationAlive.ItemLib;
 using PowerPointApp = Microsoft.Office.Interop.PowerPoint.Application;
 
 namespace PresentationAlive.PowerPointLib;
@@ -47,10 +48,7 @@ public class PowerPointItem : IItem
 
     private void App_SlideShowEnd(Presentation Pres)
     {
-        if (this.Stopped != null)
-        {
-            this.Stopped(this, new EventArgs());
-        }
+        this.Stopped?.Invoke(this, new EventArgs());
     }
 
     public void Close()

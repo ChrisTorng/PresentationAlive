@@ -12,6 +12,8 @@ public class PowerPointItem : IItem
 
     private Presentation? presentation;
 
+    private bool lastSlideReached;
+
     public event EventHandler? Stopped;
 
     public PowerPointItem(string displayName, string path)
@@ -46,7 +48,7 @@ public class PowerPointItem : IItem
         ArgumentNullException.ThrowIfNull(app);
 
         app.SlideShowEnd += this.App_SlideShowEnd;
-        //app.SlideShowNextSlide += this.App_SlideShowNextSlide;
+        app.SlideShowNextSlide += this.App_SlideShowNextSlide;
 
         this.presentation = app.Presentations.Open(this.Path, WithWindow: MsoTriState.msoFalse);
         var slideShowSettings = presentation.SlideShowSettings;
@@ -59,22 +61,26 @@ public class PowerPointItem : IItem
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(this.presentation);
 
-        this.presentation.SlideShowWindow.View.Next();
+        if (!this.lastSlideReached)
+        {
+            this.presentation.SlideShowWindow.View.Next();
+        }
+        else
+        {
+            this.presentation.SlideShowWindow.View.Exit();
+            //this.Stop();
+        }
     }
 
-    //private void App_SlideShowNextSlide(SlideShowWindow Wn)
-    //{
-    //    if (Wn.View.Slide.SlideNumber >= this.presentation?.Slides.Count)
-    //    {
-    //        this.Stop();
-    //        this.Stopped?.Invoke(this, new EventArgs());
-    //    }
-    //}
+    private void App_SlideShowNextSlide(SlideShowWindow Wn)
+    {
+        this.lastSlideReached =
+            Wn.View.CurrentShowPosition == this.presentation?.Slides.Count;
+    }
 
     private void App_SlideShowEnd(Presentation Pres)
     {
         this.Stop();
-        this.Stopped?.Invoke(this, new EventArgs());
     }
 
     public void Stop()
@@ -82,11 +88,13 @@ public class PowerPointItem : IItem
         if (app != null)
         {
             app.SlideShowEnd -= this.App_SlideShowEnd;
-            //app.SlideShowNextSlide -= this.App_SlideShowNextSlide;
+            app.SlideShowNextSlide -= this.App_SlideShowNextSlide;
         }
 
         this.presentation?.Close();
         this.presentation = null;
+
+        this.Stopped?.Invoke(this, new EventArgs());
     }
 
     public static void Close()

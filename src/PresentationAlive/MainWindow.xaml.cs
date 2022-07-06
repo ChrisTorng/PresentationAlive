@@ -16,7 +16,7 @@ public partial class MainWindow : Window
         this.InitializeComponent();
         this.Closed += MainWindow_Closed;
 
-        PowerPointItem.Open();
+        //PowerPointItem.Open();
 
         this.items = new()
         {
@@ -82,5 +82,15 @@ public partial class MainWindow : Window
                 this.Activate();
             }
         });
+    }
+
+    private void ButtonPrevious_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void ButtonStop_Click(object sender, RoutedEventArgs e)
+    {
+
     }
 }

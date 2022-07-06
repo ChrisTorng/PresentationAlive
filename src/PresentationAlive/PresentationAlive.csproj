@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AssetsSourceFiles Include="../../data/**/*.*"/>
+    <AssetsSourceFiles Include="../../data/**/*.*" />
   </ItemGroup>
 
   <Target Name="CopyCustomContent" AfterTargets="AfterBuild">

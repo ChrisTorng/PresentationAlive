@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Threading;
 using PresentationAlive.ItemLib;
@@ -16,7 +15,7 @@ public partial class MainWindow : Window
         this.InitializeComponent();
         this.Closed += MainWindow_Closed;
 
-        //PowerPointItem.Open();
+        _ = PowerPointApp.Instance;
 
         this.items = new()
         {
@@ -27,6 +26,7 @@ public partial class MainWindow : Window
         foreach (var item in this.items)
         {
             item.Stopped += this.Item_Stopped;
+            item.Open();
             this.playList.Items.Add(item.ToString());
         }
 
@@ -41,7 +41,7 @@ public partial class MainWindow : Window
             item.Stop();
         }
 
-        PowerPointItem.Close();
+        PowerPointApp.DisposeInstance();
     }
 
     private static string GetFullPath(string file) =>

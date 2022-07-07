@@ -51,12 +51,14 @@ internal class PowerPointPresentation : IDisposable
         slideShowSettings.Run();
     }
 
-    internal void Next()
+    internal bool Next()
     {
         if (!this.lastSlideReached)
         {
             this.presentation.SlideShowWindow.View.Next();
         }
+
+        return !this.lastSlideReached;
     }
 
     internal void Stop()

@@ -79,7 +79,10 @@ public class PowerPointItem : IItem
 
     public void Next()
     {
-        this.presentation?.Next();
+        if (this.presentation != null && !this.presentation.Next())
+        {
+            this.Stopped?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public void Stop()

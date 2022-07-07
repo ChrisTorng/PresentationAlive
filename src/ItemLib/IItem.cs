@@ -1,12 +1,12 @@
 namespace PresentationAlive.ItemLib;
 
-public interface IItem
+public interface IItem : IDisposable
 {
     ItemType ItemType { get; }
 
     string DisplayName { get; }
 
-    static void Open() { }
+    void Open();
 
     void Start();
 
@@ -16,5 +16,5 @@ public interface IItem
 
     void Stop();
 
-    static void Close() { }
+    void Close();
 }

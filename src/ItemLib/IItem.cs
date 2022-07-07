@@ -10,6 +10,12 @@ public interface IItem : IDisposable
 
     void Start();
 
+    bool PreviousEnabled { get; }
+
+    bool NextEnabled { get; }
+
+    void Previous();
+
     void Next();
 
     event EventHandler Stopped;

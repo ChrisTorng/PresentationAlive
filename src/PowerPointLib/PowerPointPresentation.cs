@@ -6,10 +6,9 @@ namespace PresentationAlive.PowerPointLib;
 internal class PowerPointPresentation : IDisposable
 {
     private readonly Presentation presentation;
-    private bool lastSlideReached;
     private bool disposed;
 
-    public static readonly string TAGNAME = "Id";
+    public const string TAGNAME = "Id";
 
     public string Id { get; }
     public event EventHandler? SlideShowNextSlide;
@@ -51,14 +50,33 @@ internal class PowerPointPresentation : IDisposable
         slideShowSettings.Run();
     }
 
-    internal bool Next()
+    internal bool PreviousEnabled =>
+        this.presentation.SlideShowWindow.View.CurrentShowPosition != 1;
+
+    internal bool NextEnabled =>
+        this.presentation.SlideShowWindow.View.CurrentShowPosition !=
+            this.presentation.Slides.Count;
+
+    internal bool Previous()
     {
-        if (!this.lastSlideReached)
+        if (this.PreviousEnabled)
         {
-            this.presentation.SlideShowWindow.View.Next();
+            this.presentation.SlideShowWindow.View.Previous();
+            return true;
         }
 
-        return !this.lastSlideReached;
+        return false;
+    }
+
+    internal bool Next()
+    {
+        if (this.NextEnabled)
+        {
+            this.presentation.SlideShowWindow.View.Next();
+            return true;
+        }
+
+        return false;
     }
 
     internal void Stop()
@@ -68,10 +86,6 @@ internal class PowerPointPresentation : IDisposable
 
     internal void OnSlideShowNextSlide()
     {
-        this.lastSlideReached =
-            this.presentation.SlideShowWindow.View.CurrentShowPosition ==
-            this.presentation.Slides.Count;
-
         this.SlideShowNextSlide?.Invoke(this, EventArgs.Empty);
     }
 

@@ -66,9 +66,19 @@ public partial class MainWindow : Window
         };
     }
 
+    private void ButtonPrevious_Click(object sender, RoutedEventArgs e)
+    {
+        this.GetItem()?.Previous();
+    }
+
     private void ButtonNext_Click(object sender, RoutedEventArgs e)
     {
         this.GetItem()?.Next();
+    }
+
+    private void ButtonStop_Click(object sender, RoutedEventArgs e)
+    {
+
     }
 
     private void Item_Stopped(object? sender, EventArgs eventArgs)
@@ -82,15 +92,5 @@ public partial class MainWindow : Window
                 this.Activate();
             }
         });
-    }
-
-    private void ButtonPrevious_Click(object sender, RoutedEventArgs e)
-    {
-
-    }
-
-    private void ButtonStop_Click(object sender, RoutedEventArgs e)
-    {
-
     }
 }

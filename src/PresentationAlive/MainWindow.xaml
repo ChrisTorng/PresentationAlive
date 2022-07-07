@@ -18,7 +18,7 @@
         <ToolBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <Button Content="▶️ Start" Click="ButtonStart_Click" VerticalAlignment="Stretch"/>
             <Button Content="⏹️ Stop" Click="ButtonStop_Click" IsEnabled="False" VerticalAlignment="Stretch"/>
-            <Button Content="⏮️ Previous" Click="ButtonPrevious_Click" IsEnabled="False" VerticalAlignment="Stretch"/>
+            <Button Content="⏮️ Previous" Click="ButtonPrevious_Click" VerticalAlignment="Stretch"/>
             <Button Content="⏭️ Next" Click="ButtonNext_Click" VerticalAlignment="Stretch"/>
         </ToolBar>
         <ListBox x:Name="playList" Grid.Row="1" Grid.Column="0" />

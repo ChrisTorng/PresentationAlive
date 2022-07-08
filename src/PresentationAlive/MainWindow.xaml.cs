@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.ComponentModel;
+using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
 using PresentationAlive.ItemLib;
@@ -6,13 +8,15 @@ using PresentationAlive.PowerPointLib;
 
 namespace PresentationAlive;
 
-public partial class MainWindow : Window
+public partial class MainWindow : Window, INotifyPropertyChanged
 {
+    public event PropertyChangedEventHandler? PropertyChanged;
     private readonly List<IItem> items;
 
     public MainWindow()
     {
         this.InitializeComponent();
+        this.DataContext = this;
         this.Closed += MainWindow_Closed;
 
         _ = PowerPointApp.Instance;
@@ -44,6 +48,17 @@ public partial class MainWindow : Window
         PowerPointApp.DisposeInstance();
     }
 
+    protected void OnPropertyChanged([CallerMemberName] string? name = null)
+    {
+        this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+
+    private void BindingChanged()
+    {
+        this.OnPropertyChanged(nameof(this.PreviousEnabled));
+        this.OnPropertyChanged(nameof(this.NextEnabled));
+    }
+
     private static string GetFullPath(string file) =>
         Path.Combine(Directory.GetCurrentDirectory(), file);
 
@@ -53,6 +68,7 @@ public partial class MainWindow : Window
         {
             this.GetItem()?.Start();
             this.Activate();
+            this.BindingChanged();
         }
     }
 
@@ -66,19 +82,27 @@ public partial class MainWindow : Window
         };
     }
 
+    public bool PreviousEnabled =>
+        (this.GetItem()?.PreviousEnabled).GetValueOrDefault();
+
+    public bool NextEnabled =>
+        (this.GetItem()?.NextEnabled).GetValueOrDefault();
+
     private void ButtonPrevious_Click(object sender, RoutedEventArgs e)
     {
         this.GetItem()?.Previous();
+        this.BindingChanged();
     }
 
     private void ButtonNext_Click(object sender, RoutedEventArgs e)
     {
         this.GetItem()?.Next();
+        this.BindingChanged();
     }
 
     private void ButtonStop_Click(object sender, RoutedEventArgs e)
     {
-
+        this.BindingChanged();
     }
 
     private void Item_Stopped(object? sender, EventArgs eventArgs)
@@ -90,6 +114,7 @@ public partial class MainWindow : Window
                 this.playList.SelectedIndex++;
                 this.GetItem()?.Start();
                 this.Activate();
+                this.BindingChanged();
             }
         });
     }

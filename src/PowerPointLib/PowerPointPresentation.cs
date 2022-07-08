@@ -6,6 +6,7 @@ namespace PresentationAlive.PowerPointLib;
 internal class PowerPointPresentation : IDisposable
 {
     private readonly Presentation presentation;
+    private bool started;
     private bool disposed;
 
     public const string TAGNAME = "Id";
@@ -48,12 +49,15 @@ internal class PowerPointPresentation : IDisposable
         var slideShowSettings = presentation.SlideShowSettings;
         slideShowSettings.ShowWithAnimation = MsoTriState.msoTrue;
         slideShowSettings.Run();
+        this.started = true;
     }
 
     internal bool PreviousEnabled =>
+        this.started &&
         this.presentation.SlideShowWindow.View.CurrentShowPosition != 1;
 
     internal bool NextEnabled =>
+        this.started &&
         this.presentation.SlideShowWindow.View.CurrentShowPosition !=
             this.presentation.Slides.Count;
 
@@ -81,6 +85,7 @@ internal class PowerPointPresentation : IDisposable
 
     internal void Stop()
     {
+        this.started = false;
         //this.presentation.SlideShowWindow.View.Exit();
     }
 

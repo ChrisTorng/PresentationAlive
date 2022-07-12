@@ -83,20 +83,52 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     }
 
     public bool PreviousEnabled =>
+        this.CurrentItemPreviousAvailable || this.PreviousItemAvailable;
+
+    private bool CurrentItemPreviousAvailable =>
         (this.GetItem()?.PreviousEnabled).GetValueOrDefault();
 
+    private bool PreviousItemAvailable =>
+        this.playList.SelectedIndex > 0;
+
     public bool NextEnabled =>
+        this.CurrentItemNextAvailable || this.NextItemAvailable;
+
+    private bool CurrentItemNextAvailable =>
         (this.GetItem()?.NextEnabled).GetValueOrDefault();
+
+    private bool NextItemAvailable =>
+        this.playList.SelectedIndex < this.playList.Items.Count - 1;
 
     private void ButtonPrevious_Click(object sender, RoutedEventArgs e)
     {
-        this.GetItem()?.Previous();
+        if (this.CurrentItemPreviousAvailable)
+        {
+            this.GetItem()?.Previous();
+        }
+        else
+        {
+            this.playList.SelectedIndex--;
+            this.GetItem()?.Start();
+            this.Activate();
+        }
+
         this.BindingChanged();
     }
 
     private void ButtonNext_Click(object sender, RoutedEventArgs e)
     {
-        this.GetItem()?.Next();
+        if (this.CurrentItemNextAvailable)
+        {
+            this.GetItem()?.Next();
+        }
+        else
+        {
+            this.playList.SelectedIndex++;
+            this.GetItem()?.Start();
+            this.Activate();
+        }
+
         this.BindingChanged();
     }
 
@@ -109,7 +141,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     {
         Dispatcher.Invoke(() =>
         {
-            if (this.playList.SelectedIndex < this.playList.Items.Count - 1)
+            if (this.NextItemAvailable)
             {
                 this.playList.SelectedIndex++;
                 this.GetItem()?.Start();

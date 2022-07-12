@@ -19,6 +19,8 @@ public class PowerPointApp : IDisposable
             WindowState = PpWindowState.ppWindowMinimized,
         };
 
+        this.ClosePresentationsLefted();
+
         app.SlideShowNextSlide += this.App_SlideShowNextSlide;
         app.SlideShowEnd += this.App_SlideShowEnd;
 
@@ -66,14 +68,40 @@ public class PowerPointApp : IDisposable
 
         if (disposing)
         {
-            foreach (var powerPointPresentation in this.presentations)
+            foreach (var powerPointPresentation in this.presentations.Values)
             {
-                powerPointPresentation.Value.Dispose();
+                powerPointPresentation.Dispose();
             }
         }
 
-        this.app.Quit();
+        this.ClosePresentationsLefted();
+
+        // app.Quit sometimes has System.Runtime.InteropServices.COMException:
+        // 'Application (unknown member) : Invalid request. This operation cannot be performed in this event handler.'
+        if (SynchronizationContext.Current != null)
+        {
+            SynchronizationContext.Current.Post(s => this.app.Quit(), null);
+        }
+        else
+        {
+            this.app.Quit();
+        }
+
+        // When slide showing, exit app needs GC Collect, or the ppt will not close reliably
+        GC.Collect();
         this.disposed = true;
+    }
+
+    private void ClosePresentationsLefted()
+    {
+        // If previous ppt not exited, this can close all lefted
+        if (this.app.Presentations.Count > 0)
+        {
+            foreach (Presentation presentation in this.app.Presentations)
+            {
+                presentation.Close();
+            }
+        }
     }
 
     private static string PresentationId(Presentation presentation) =>

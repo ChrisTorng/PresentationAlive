@@ -18,7 +18,7 @@ public interface IItem : IDisposable
 
     void Next();
 
-    event EventHandler Stopped;
+    event EventHandler? Stopped;
 
     void Stop();
 

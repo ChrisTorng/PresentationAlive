@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
 using PresentationAlive.ItemLib;
+using PresentationAlive.Items;
 using PresentationAlive.PowerPointLib;
 
 namespace PresentationAlive;
@@ -19,12 +20,14 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         this.DataContext = this;
         this.Closed += MainWindow_Closed;
 
-        _ = PowerPointApp.Instance;
+        //_ = PowerPointApp.Instance;
 
         this.items = new()
         {
-            new PowerPointItem("A", GetFullPath(@"data\a.pptx")),
-            new PowerPointItem("B", GetFullPath(@"data\b.pptx")),
+            new ImageItem("Image1", GetFullPath(@"data\Image1.png")),
+            new ImageItem("Image2", GetFullPath(@"data\Image2.jpg")),
+            //new PowerPointItem("A", GetFullPath(@"data\a.pptx")),
+            //new PowerPointItem("B", GetFullPath(@"data\b.pptx")),
         };
 
         foreach (var item in this.items)
@@ -45,7 +48,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             item.Stop();
         }
 
-        PowerPointApp.DisposeInstance();
+        //PowerPointApp.DisposeInstance();
     }
 
     protected void OnPropertyChanged([CallerMemberName] string? name = null)
@@ -78,6 +81,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         return item.ItemType switch
         {
             ItemType.PowerPoint => item as PowerPointItem,
+            ItemType.Image => item as ImageItem,
             _ => null
         };
     }

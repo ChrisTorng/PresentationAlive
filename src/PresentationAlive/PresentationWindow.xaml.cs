@@ -23,5 +23,10 @@ namespace PresentationAlive
         {
             InitializeComponent();
         }
+
+        public void SetContent(UIElement uiElement)
+        {
+            this.Content = uiElement;
+        }
     }
 }

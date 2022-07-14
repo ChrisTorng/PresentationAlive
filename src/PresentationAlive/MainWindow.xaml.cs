@@ -26,6 +26,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         {
             new ImageItem("Image1", GetFullPath(@"data\Image1.png")),
             new ImageItem("Image2", GetFullPath(@"data\Image2.jpg")),
+            new BrowserItem("就是這個時刻", "https://www.youtube.com/watch?v=8xGdaxTpAYA"),
             //new PowerPointItem("A", GetFullPath(@"data\a.pptx")),
             //new PowerPointItem("B", GetFullPath(@"data\b.pptx")),
         };
@@ -82,6 +83,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         {
             ItemType.PowerPoint => item as PowerPointItem,
             ItemType.Image => item as ImageItem,
+            ItemType.Browser => item as BrowserItem,
             _ => null
         };
     }

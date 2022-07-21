@@ -7,7 +7,7 @@ namespace PresentationAlive.Items
 {
     internal abstract class AbstractItem : IItem
     {
-        private static PresentationWindow window = new PresentationWindow();
+        protected static PresentationWindow window = new PresentationWindow();
         private bool disposed;
 
         public event EventHandler? Stopped;
@@ -41,7 +41,7 @@ namespace PresentationAlive.Items
         }
 
         public override string ToString() =>
-            "Image: " + this.DisplayName;
+            $"{this.ItemType}: {this.DisplayName}";
 
         public ItemType ItemType { get; }
 

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0-windows</TargetFramework>
@@ -28,7 +28,8 @@
 			<VersionMinor>11</VersionMinor>
 			<!-- <VersionMinor>12</VersionMinor> -->
 			<Lcid>0</Lcid>
-			<WrapperTool>primary</WrapperTool>
+			<WrapperTool>tlbimp</WrapperTool>
+			<!--<WrapperTool>primary</WrapperTool>-->
 			<Isolated>False</Isolated>
 			<EmbedInteropTypes>True</EmbedInteropTypes>
 		</COMReference>

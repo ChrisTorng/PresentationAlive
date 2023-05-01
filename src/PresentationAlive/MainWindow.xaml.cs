@@ -20,15 +20,15 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         this.DataContext = this;
         this.Closed += MainWindow_Closed;
 
-        //_ = PowerPointApp.Instance;
+        _ = PowerPointApp.Instance;
 
         this.items = new()
         {
             new ImageItem("Image1", GetFullPath(@"data\Image1.png")),
             new ImageItem("Image2", GetFullPath(@"data\Image2.jpg")),
             new BrowserItem("就是這個時刻", "https://www.youtube.com/watch?v=8xGdaxTpAYA"),
-            //new PowerPointItem("A", GetFullPath(@"data\a.pptx")),
-            //new PowerPointItem("B", GetFullPath(@"data\b.pptx")),
+            new PowerPointItem("A", GetFullPath(@"data\a.pptx")),
+            new PowerPointItem("B", GetFullPath(@"data\b.pptx")),
         };
 
         foreach (var item in this.items)
@@ -49,7 +49,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             item.Stop();
         }
 
-        //PowerPointApp.DisposeInstance();
+        PowerPointApp.DisposeInstance();
     }
 
     protected void OnPropertyChanged([CallerMemberName] string? name = null)

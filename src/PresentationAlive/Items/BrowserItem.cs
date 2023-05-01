@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using Microsoft.Web.WebView2.Wpf;
+﻿using Microsoft.Web.WebView2.Wpf;
 using PresentationAlive.ItemLib;
 
 namespace PresentationAlive.Items
@@ -8,6 +6,7 @@ namespace PresentationAlive.Items
     internal class BrowserItem : AbstractItem
     {
         private WebView2? webView2;
+        private bool derivedDisposed;
 
         public BrowserItem(string displayName, string path)
             : base(ItemType.Browser, displayName, path)
@@ -25,6 +24,21 @@ namespace PresentationAlive.Items
         public override void Start()
         {
             AbstractItem.Start(this.webView2!);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (!derivedDisposed)
+            {
+                if (disposing)
+                {
+                    this.webView2?.Dispose();
+                }
+
+                derivedDisposed = true;
+            }
+
+            base.Dispose(disposing);
         }
     }
 }

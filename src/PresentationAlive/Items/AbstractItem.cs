@@ -1,13 +1,11 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using PresentationAlive.ItemLib;
 
 namespace PresentationAlive.Items
 {
     internal abstract class AbstractItem : IItem
     {
-        protected static PresentationWindow window = new PresentationWindow();
+        protected static PresentationWindow window = new();
         private bool disposed;
 
         public event EventHandler? Stopped;

@@ -1,6 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-using Microsoft.Office.Core;
-using Microsoft.Office.Interop.PowerPoint;
 using PresentationAlive.ItemLib;
 
 namespace PresentationAlive.PowerPointLib;

@@ -31,10 +31,7 @@ public class PowerPointApp : IDisposable
     {
         get
         {
-            if (instance == null)
-            {
-                instance = new PowerPointApp();
-            }
+            instance ??= new PowerPointApp();
 
             return instance;
         }

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using PresentationAlive.ItemLib;
 using PresentationAlive.Items;
@@ -35,7 +36,12 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         {
             item.Stopped += this.Item_Stopped;
             item.Open();
-            this.playList.Items.Add(item.ToString());
+            var listBoxItem = new ListBoxItem()
+            {
+                Content = item.ToString(),
+                ToolTip = item.Path,
+            };
+            this.playList.Items.Add(listBoxItem);
         }
 
         this.playList.SelectedIndex = 0;

@@ -6,6 +6,8 @@ public interface IItem : IDisposable
 
     string DisplayName { get; }
 
+    string Path { get; }
+
     void Open();
 
     void Start();

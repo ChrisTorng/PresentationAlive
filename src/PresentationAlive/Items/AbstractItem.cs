@@ -74,6 +74,7 @@ namespace PresentationAlive.Items
         public void Stop()
         {
             window.Close();
+            this.Stopped?.Invoke(this, new EventArgs());
         }
 
         public void Close()

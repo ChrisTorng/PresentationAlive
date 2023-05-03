@@ -9,8 +9,8 @@ While it's possible to use VS Code for development, we highly recommend using Vi
 1. Open "Developer Command Prompt for VS 2022"
 2. Change the directory to "PresentationAlive\src" using the `cd` command.
 3. Run `dotnet restore` to restore the NuGet libraries.
-4. Run `where msbuild` to get the path of the MSBuild.exe file used by Visual Studio 2022.
-5. Update the command path in the `tasks.json` file.
+4. Run `where msbuild` to get the path of the `MSBuild.exe` file under `Microsoft Visual Studio\2022` folder.
+5. Update the command path in the `tasks.json` file, change path divider `\` to `/`.
 6. Follow the steps specific to Visual Studio 2022, or do the following manual steps.
 
 Manual steps:

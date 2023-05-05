@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using PresentationAlive.ItemLib;
 
 namespace PresentationAlive.Items
@@ -25,7 +26,7 @@ namespace PresentationAlive.Items
         public void Dispose()
         {
             this.Dispose(true);
-           GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
@@ -51,6 +52,9 @@ namespace PresentationAlive.Items
 
         public bool NextEnabled => false;
 
+        ReadOnlyCollection<IItem>? IItem.SubItems { get; }
+
+        public ReadOnlyCollection<AbstractItem>? SubItems { get; }
 
         public abstract void Open();
 

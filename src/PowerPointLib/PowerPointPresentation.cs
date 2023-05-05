@@ -1,5 +1,6 @@
 ﻿using Microsoft.Office.Core;
 using Microsoft.Office.Interop.PowerPoint;
+using Ppt = Microsoft.Office.Interop.PowerPoint;
 
 namespace PresentationAlive.PowerPointLib;
 
@@ -51,6 +52,34 @@ internal class PowerPointPresentation : IDisposable
         slideShowSettings.Run();
         this.started = true;
     }
+
+    internal IEnumerable<string> IterateAllSlides()
+    {
+        foreach (Slide slide in this.presentation.Slides)
+        {
+            string slideTitle = string.Empty;
+
+            foreach (Ppt.Shape shape in slide.Shapes)
+            {
+                if (shape.HasTextFrame == MsoTriState.msoTrue)
+                {
+                    if (shape.TextFrame.HasText == MsoTriState.msoTrue)
+                    {
+                        TextRange textRange = shape.TextFrame.TextRange;
+                        if (textRange.ParagraphFormat.Bullet.Type == PpBulletType.ppBulletNone &&
+                            textRange.Font.Size > 24)
+                        {
+                            slideTitle = textRange.Text;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            yield return $"{slide.SlideID}/{slide.SlideIndex}/{slide.SlideNumber}/{slide.HeadersFooters.Header.Text}/{slideTitle}";
+        }
+    }
+
 
     internal bool PreviousEnabled =>
         this.started &&

@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using PresentationAlive.ItemLib;
 
 namespace PresentationAlive.PowerPointLib;
@@ -58,6 +59,8 @@ public class PowerPointItem : IItem
     public string DisplayName { get; }
 
     public string Path { get; }
+
+    ReadOnlyCollection<IItem>? IItem.SubItems { get; }
 
     public override string ToString() =>
         "PowerPoint: " + this.DisplayName;

@@ -23,14 +23,15 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
         _ = PowerPointApp.Instance;
 
-        this.items = new()
+        this.items = (new List<IItem>()
         {
             new ImageItem("Image1", GetFullPath(@"data\Image1.png")),
             new ImageItem("Image2", GetFullPath(@"data\Image2.jpg")),
             new BrowserItem("就是這個時刻", "https://www.youtube.com/watch?v=8xGdaxTpAYA"),
-            new PowerPointItem("A", GetFullPath(@"data\a.pptx")),
-            new PowerPointItem("B", GetFullPath(@"data\b.pptx")),
-        };
+        })
+            .Concat(IteratePowerPointSlides("A", GetFullPath(@"data\a.pptx")))
+            .Concat(IteratePowerPointSlides("B", GetFullPath(@"data\b.pptx")))
+            .ToList();
 
         foreach (var item in this.items)
         {
@@ -58,6 +59,19 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         }
 
         this.playList.SelectedIndex = 0;
+    }
+
+    private static IEnumerable<IItem> IteratePowerPointSlides(string displayName, string path)
+    {
+        var item = new PowerPointItem(displayName, GetFullPath(path));
+        yield return item;
+        if (item.SubItems is not null)
+        {
+            foreach (var subItem in item.SubItems)
+            {
+                yield return subItem;
+            }
+        }
     }
 
     private void MainWindow_Closed(object? sender, EventArgs e)

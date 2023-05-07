@@ -21,7 +21,7 @@
             <Button Content="⏮️ Previous" Click="ButtonPrevious_Click" VerticalAlignment="Stretch" IsEnabled="{Binding PreviousEnabled}"/>
             <Button Content="⏭️ Next" Click="ButtonNext_Click" VerticalAlignment="Stretch" IsEnabled="{Binding NextEnabled}"/>
         </ToolBar>
-        <ListBox x:Name="playList" Grid.Row="1" Grid.Column="0" />
+        <ListBox x:Name="playList" Grid.Row="1" Grid.Column="0" SelectionChanged="playList_SelectionChanged" />
 
         <StackPanel Grid.Row="1" Grid.Column="1">
         </StackPanel>

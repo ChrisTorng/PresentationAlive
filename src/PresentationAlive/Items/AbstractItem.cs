@@ -52,9 +52,9 @@ namespace PresentationAlive.Items
 
         public bool NextEnabled => false;
 
-        ReadOnlyCollection<IItem>? IItem.SubItems { get; }
+        IEnumerable<IItem>? IItem.SubItems { get; }
 
-        public ReadOnlyCollection<AbstractItem>? SubItems { get; }
+        public IEnumerable<AbstractItem>? SubItems { get; }
 
         public abstract void Open();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Office.Core;
+﻿using System.Globalization;
+using Microsoft.Office.Core;
 using Microsoft.Office.Interop.PowerPoint;
 using Ppt = Microsoft.Office.Interop.PowerPoint;
 
@@ -53,7 +54,7 @@ internal class PowerPointPresentation : IDisposable
         this.started = true;
     }
 
-    internal IEnumerable<string> IterateAllSlides()
+    internal IEnumerable<PowerPointSubItem> IterateAllSlides()
     {
         foreach (Slide slide in this.presentation.Slides)
         {
@@ -76,7 +77,7 @@ internal class PowerPointPresentation : IDisposable
                 }
             }
 
-            yield return $"{slide.SlideID}/{slide.SlideIndex}/{slide.SlideNumber}/{slide.HeadersFooters.Header.Text}/{slideTitle}";
+            yield return new PowerPointSubItem(this, slide.SlideIndex, slideTitle);
         }
     }
 
@@ -110,6 +111,11 @@ internal class PowerPointPresentation : IDisposable
         }
 
         return false;
+    }
+
+    internal void ShowSlide(int index)
+    {
+        this.presentation.Slides[index].Select();
     }
 
     internal void Stop()

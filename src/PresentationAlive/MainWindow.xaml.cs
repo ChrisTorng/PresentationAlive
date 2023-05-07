@@ -42,6 +42,19 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                 ToolTip = item.Path,
             };
             this.playList.Items.Add(listBoxItem);
+
+            if (item.SubItems is not null)
+            {
+                foreach (var subItem in item.SubItems)
+                {
+                    var listBoxSubItem = new ListBoxItem()
+                    {
+                        Content = "    " + subItem.ToString(),
+                        ToolTip = item.ToString(),
+                    };
+                    this.playList.Items.Add(listBoxSubItem);
+                }
+            }
         }
 
         this.playList.SelectedIndex = 0;
@@ -88,6 +101,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         return item.ItemType switch
         {
             ItemType.PowerPoint => item as PowerPointItem,
+            ItemType.PowerPointSlide => item as PowerPointSubItem,
             ItemType.Image => item as ImageItem,
             ItemType.Browser => item as BrowserItem,
             _ => null
@@ -161,5 +175,11 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                 this.BindingChanged();
             }
         });
+    }
+
+    private void playList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        this.GetItem()?.Start();
+        this.Activate();
     }
 }

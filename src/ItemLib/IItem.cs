@@ -1,5 +1,3 @@
-using System.Collections.ObjectModel;
-
 namespace PresentationAlive.ItemLib;
 
 public interface IItem : IDisposable
@@ -10,7 +8,7 @@ public interface IItem : IDisposable
 
     string Path { get; }
 
-    ReadOnlyCollection<IItem>? SubItems { get; }
+    IEnumerable<IItem>? SubItems { get; }
 
     void Open();
 

@@ -4,6 +4,7 @@ public enum ItemType
 {
     Unknown = 0,
     PowerPoint = 1,
-    Image = 2,
-    Browser = 3,
+    PowerPointSlide = 2,
+    Image = 3,
+    Browser = 4,
 }

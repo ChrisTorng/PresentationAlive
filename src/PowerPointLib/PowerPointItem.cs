@@ -37,8 +37,8 @@ public class PowerPointItem : IItem
 
         if (disposing && this.presentation != null)
         {
-            this.presentation.SlideShowNextSlide += this.SlideShowNextSlide;
-            this.presentation.SlideShowEnd += this.SlideShowEnd;
+            this.presentation.SlideShowNextSlide -= this.SlideShowNextSlide;
+            this.presentation.SlideShowEnd -= this.SlideShowEnd;
             this.presentation.Dispose();
         }
 
@@ -60,7 +60,10 @@ public class PowerPointItem : IItem
 
     public string Path { get; }
 
-    ReadOnlyCollection<IItem>? IItem.SubItems { get; }
+    IEnumerable<IItem>? IItem.SubItems => this.SubItems;
+
+    public IEnumerable<PowerPointSubItem>? SubItems =>
+        this.presentation?.IterateAllSlides();
 
     public override string ToString() =>
         "PowerPoint: " + this.DisplayName;
@@ -77,29 +80,29 @@ public class PowerPointItem : IItem
         this.presentation?.Start();
     }
 
-    public bool PreviousEnabled =>
-        (this.presentation?.PreviousEnabled).GetValueOrDefault();
+    public bool PreviousEnabled => false;
+    //(this.presentation?.PreviousEnabled).GetValueOrDefault();
 
-    public bool NextEnabled =>
-        (this.presentation?.NextEnabled).GetValueOrDefault();
+    public bool NextEnabled => false;
+        //(this.presentation?.NextEnabled).GetValueOrDefault();
 
     public void Previous()
     {
-        if (this.presentation != null &&
-            this.PreviousEnabled &&
-            !this.presentation.Previous())
-        {
-        }
+        //if (this.presentation != null &&
+        //    this.PreviousEnabled &&
+        //    !this.presentation.Previous())
+        //{
+        //}
     }
 
     public void Next()
     {
-        if (this.presentation != null &&
-            this.NextEnabled &&
-            !this.presentation.Next())
-        {
-            this.Stopped?.Invoke(this, EventArgs.Empty);
-        }
+        //if (this.presentation != null &&
+        //    this.NextEnabled &&
+        //    !this.presentation.Next())
+        //{
+        //    this.Stopped?.Invoke(this, EventArgs.Empty);
+        //}
     }
 
     public void Stop()
@@ -111,8 +114,8 @@ public class PowerPointItem : IItem
     {
         if (this.presentation != null)
         {
-            this.presentation.SlideShowNextSlide += this.SlideShowNextSlide;
-            this.presentation.SlideShowEnd += this.SlideShowEnd;
+            this.presentation.SlideShowNextSlide -= this.SlideShowNextSlide;
+            this.presentation.SlideShowEnd -= this.SlideShowEnd;
             this.presentation.Dispose();
         }
     }

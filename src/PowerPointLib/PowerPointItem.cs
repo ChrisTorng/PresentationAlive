@@ -70,9 +70,12 @@ public class PowerPointItem : IItem
 
     public void Open()
     {
-        this.presentation = app.GetPresentation(this.Path);
-        this.presentation.SlideShowNextSlide += this.SlideShowNextSlide;
-        this.presentation.SlideShowEnd += this.SlideShowEnd;
+        if (this.presentation is null)
+        {
+            this.presentation = app.GetPresentation(this.Path);
+            this.presentation.SlideShowNextSlide += this.SlideShowNextSlide;
+            this.presentation.SlideShowEnd += this.SlideShowEnd;
+        }
     }
 
     public void Start()

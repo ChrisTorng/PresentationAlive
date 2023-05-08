@@ -115,7 +115,13 @@ internal class PowerPointPresentation : IDisposable
 
     internal void ShowSlide(int index)
     {
-        this.presentation.Slides[index].Select();
+        if (!started)
+        {
+            this.Start();
+        }
+
+        this.presentation.SlideShowWindow.View.GotoSlide(index);
+        this.presentation.SlideShowWindow.Activate();
     }
 
     internal void Stop()

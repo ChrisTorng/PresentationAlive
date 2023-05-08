@@ -36,26 +36,17 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         foreach (var item in this.items)
         {
             item.Stopped += this.Item_Stopped;
-            item.Open();
+            if (item.ItemType is not (ItemType.PowerPoint or ItemType.PowerPointSlide))
+            {
+                item.Open();
+            }
+
             var listBoxItem = new ListBoxItem()
             {
                 Content = item.ToString(),
                 ToolTip = item.Path,
             };
             this.playList.Items.Add(listBoxItem);
-
-            if (item.SubItems is not null)
-            {
-                foreach (var subItem in item.SubItems)
-                {
-                    var listBoxSubItem = new ListBoxItem()
-                    {
-                        Content = "    " + subItem.ToString(),
-                        ToolTip = item.ToString(),
-                    };
-                    this.playList.Items.Add(listBoxSubItem);
-                }
-            }
         }
 
         this.playList.SelectedIndex = 0;
@@ -64,6 +55,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     private static IEnumerable<IItem> IteratePowerPointSlides(string displayName, string path)
     {
         var item = new PowerPointItem(displayName, GetFullPath(path));
+        item.Open();
         yield return item;
         if (item.SubItems is not null)
         {

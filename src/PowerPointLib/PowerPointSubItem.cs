@@ -65,7 +65,6 @@ namespace PresentationAlive.PowerPointLib
 
         public void Open()
         {
-            this.presentation.ShowSlide(this.index);
         }
 
         public void Previous()
@@ -74,6 +73,7 @@ namespace PresentationAlive.PowerPointLib
 
         public void Start()
         {
+            this.presentation.ShowSlide(this.index);
         }
 
         public void Stop()

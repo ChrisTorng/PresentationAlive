@@ -48,10 +48,6 @@ namespace PresentationAlive.Items
 
         public string Path { get; }
 
-        public bool PreviousEnabled => false;
-
-        public bool NextEnabled => false;
-
         IEnumerable<IItem>? IItem.SubItems { get; }
 
         public IEnumerable<AbstractItem>? SubItems { get; }
@@ -65,14 +61,6 @@ namespace PresentationAlive.Items
             window.SetContent(uiElement);
             window.Show();
             window.Activate();
-        }
-
-        public void Previous()
-        {
-        }
-
-        public void Next()
-        {
         }
 
         public void Stop()

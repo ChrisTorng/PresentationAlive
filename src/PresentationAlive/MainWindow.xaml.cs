@@ -114,53 +114,19 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         };
     }
 
-    public bool PreviousEnabled =>
-        this.CurrentItemPreviousAvailable || this.PreviousItemAvailable;
+    public bool PreviousEnabled => this.playList.SelectedIndex > 0;
 
-    private bool CurrentItemPreviousAvailable =>
-        (this.GetItem()?.PreviousEnabled).GetValueOrDefault();
-
-    private bool PreviousItemAvailable =>
-        this.playList.SelectedIndex > 0;
-
-    public bool NextEnabled =>
-        this.CurrentItemNextAvailable || this.NextItemAvailable;
-
-    private bool CurrentItemNextAvailable =>
-        (this.GetItem()?.NextEnabled).GetValueOrDefault();
-
-    private bool NextItemAvailable =>
-        this.playList.SelectedIndex < this.playList.Items.Count - 1;
+    public bool NextEnabled => this.playList.SelectedIndex < this.playList.Items.Count;
 
     private void ButtonPrevious_Click(object sender, RoutedEventArgs e)
     {
-        if (this.CurrentItemPreviousAvailable)
-        {
-            this.GetItem()?.Previous();
-        }
-        else
-        {
-            this.playList.SelectedIndex--;
-            this.GetItem()?.Start();
-            this.Activate();
-        }
-
+        this.playList.SelectedIndex--;
         this.BindingChanged();
     }
 
     private void ButtonNext_Click(object sender, RoutedEventArgs e)
     {
-        if (this.CurrentItemNextAvailable)
-        {
-            this.GetItem()?.Next();
-        }
-        else
-        {
-            this.playList.SelectedIndex++;
-            this.GetItem()?.Start();
-            this.Activate();
-        }
-
+        this.playList.SelectedIndex++;
         this.BindingChanged();
     }
 
@@ -173,13 +139,10 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     {
         Dispatcher.Invoke(() =>
         {
-            if (this.NextItemAvailable)
-            {
-                this.playList.SelectedIndex++;
-                this.GetItem()?.Start();
-                this.Activate();
-                this.BindingChanged();
-            }
+            this.playList.SelectedIndex++;
+            this.GetItem()?.Start();
+            this.Activate();
+            this.BindingChanged();
         });
     }
 

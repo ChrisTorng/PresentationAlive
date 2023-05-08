@@ -83,31 +83,6 @@ public class PowerPointItem : IItem
         this.presentation?.Start();
     }
 
-    public bool PreviousEnabled => false;
-    //(this.presentation?.PreviousEnabled).GetValueOrDefault();
-
-    public bool NextEnabled => false;
-        //(this.presentation?.NextEnabled).GetValueOrDefault();
-
-    public void Previous()
-    {
-        //if (this.presentation != null &&
-        //    this.PreviousEnabled &&
-        //    !this.presentation.Previous())
-        //{
-        //}
-    }
-
-    public void Next()
-    {
-        //if (this.presentation != null &&
-        //    this.NextEnabled &&
-        //    !this.presentation.Next())
-        //{
-        //    this.Stopped?.Invoke(this, EventArgs.Empty);
-        //}
-    }
-
     public void Stop()
     {
         this.presentation?.Stop();

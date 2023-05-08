@@ -28,10 +28,6 @@ namespace PresentationAlive.PowerPointLib
         public override string ToString() =>
             $"{this.Path}: {this.DisplayName}";
 
-        public bool PreviousEnabled => false;
-
-        public bool NextEnabled => false;
-
         public event EventHandler? Stopped;
 
         public void Close()
@@ -59,21 +55,13 @@ namespace PresentationAlive.PowerPointLib
             this.disposed = true;
         }
 
-        public void Next()
+        public void Start()
         {
+            this.presentation.ShowSlide(this.index);
         }
 
         public void Open()
         {
-        }
-
-        public void Previous()
-        {
-        }
-
-        public void Start()
-        {
-            this.presentation.ShowSlide(this.index);
         }
 
         public void Stop()

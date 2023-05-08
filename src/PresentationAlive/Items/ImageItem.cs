@@ -4,7 +4,7 @@ using PresentationAlive.ItemLib;
 
 namespace PresentationAlive.Items
 {
-    internal class ImageItem : AbstractItem
+    internal sealed class ImageItem : AbstractItem
     {
         private Image? image;
 

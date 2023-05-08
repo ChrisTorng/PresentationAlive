@@ -3,7 +3,7 @@ using PresentationAlive.ItemLib;
 
 namespace PresentationAlive.Items
 {
-    internal class BrowserItem : AbstractItem
+    internal sealed class BrowserItem : AbstractItem
     {
         private WebView2? webView2;
         private bool derivedDisposed;

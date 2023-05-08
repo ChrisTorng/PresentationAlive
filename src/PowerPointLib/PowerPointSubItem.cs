@@ -26,9 +26,11 @@ namespace PresentationAlive.PowerPointLib
         public IEnumerable<IItem>? SubItems { get; }
 
         public override string ToString() =>
-            $"{this.Path}: {this.DisplayName}";
+            $"    {this.Path}: {this.DisplayName}";
 
+#pragma warning disable CS0067 // The event 'PowerPointSubItem.Stopped' is never used
         public event EventHandler? Stopped;
+#pragma warning restore CS0067 // The event 'PowerPointSubItem.Stopped' is never used
 
         public void Close()
         {

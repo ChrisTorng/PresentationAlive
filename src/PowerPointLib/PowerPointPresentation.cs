@@ -5,7 +5,7 @@ using Ppt = Microsoft.Office.Interop.PowerPoint;
 
 namespace PresentationAlive.PowerPointLib;
 
-internal class PowerPointPresentation : IDisposable
+internal sealed class PowerPointPresentation : IDisposable
 {
     private readonly Presentation presentation;
     private bool started;
@@ -35,7 +35,7 @@ internal class PowerPointPresentation : IDisposable
         GC.SuppressFinalize(this);
     }
 
-    protected virtual void Dispose(bool disposing)
+    private void Dispose(bool disposing)
     {
         if (this.disposed)
         {

@@ -50,6 +50,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         }
 
         this.playList.SelectedIndex = 0;
+        this.Activate();
     }
 
     private static IEnumerable<IItem> IteratePowerPointSlides(string displayName, string path)
@@ -57,6 +58,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         var item = new PowerPointItem(displayName, GetFullPath(path));
         item.Open();
         yield return item;
+
         if (item.SubItems is not null)
         {
             foreach (var subItem in item.SubItems)
@@ -95,9 +97,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     {
         if (this.playList.SelectedIndex >= 0)
         {
-            this.GetItem()?.Start();
-            this.Activate();
-            this.BindingChanged();
+            this.StartCurrentItem();
         }
     }
 
@@ -116,18 +116,16 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
     public bool PreviousEnabled => this.playList.SelectedIndex > 0;
 
-    public bool NextEnabled => this.playList.SelectedIndex < this.playList.Items.Count;
+    public bool NextEnabled => this.playList.SelectedIndex < this.playList.Items.Count - 1;
 
     private void ButtonPrevious_Click(object sender, RoutedEventArgs e)
     {
         this.playList.SelectedIndex--;
-        this.BindingChanged();
     }
 
     private void ButtonNext_Click(object sender, RoutedEventArgs e)
     {
         this.playList.SelectedIndex++;
-        this.BindingChanged();
     }
 
     private void ButtonStop_Click(object sender, RoutedEventArgs e)
@@ -140,15 +138,18 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         Dispatcher.Invoke(() =>
         {
             this.playList.SelectedIndex++;
-            this.GetItem()?.Start();
-            this.Activate();
-            this.BindingChanged();
         });
     }
 
     private void playList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
+        this.StartCurrentItem();
+    }
+
+    private void StartCurrentItem()
+    {
         this.GetItem()?.Start();
         this.Activate();
+        this.BindingChanged();
     }
 }

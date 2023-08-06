@@ -1,5 +1,8 @@
 # PresentationAlive
-Make church presentation easy.
+
+讓教會雙螢幕投影更容易的 Windows 小工具，支援 PowerPoint 播放，引用網頁或本機圖片。
+
+Make church dual screen presentation easy on Windows. Supports PowerPoint, web pages or local images.
 
 # How to build
 Please note that Visual Studio 2022 (Community up) with .NET Desktop workload is required.
@@ -16,13 +19,13 @@ While it's possible to use VS Code for development, we highly recommend using Vi
 Manual steps:
 1. Navigate to the file src\PowerPointLib\PowerPointLib.csproj
    Currently thay are:
-   +----------------------------------------+-------------------------------------+-------------+
+
+   | GUID                                   | Name                                | Version     |
+   |----------------------------------------|-------------------------------------|-------------|
    | {0002E157-0000-0000-C000-000000000046} | VBIDE                               | 5.3         |
-   +----------------------------------------+-------------------------------------+-------------+
    | {2DF8D04C-5BFA-101B-BDE5-00AA0044DE52} | Microsoft.Office.Core               | 2.7         |
-   +----------------------------------------+-------------------------------------+-------------+
    | {91493440-5A91-11CF-8700-00AA0060263B} | Microsoft.Office.Interop.PowerPoint | 2.b => 2.11 |
-   +----------------------------------------+-------------------------------------+-------------+
+
 2. Open regedit and navigate to `HKEY_CLASSES_ROOT\TypeLib`
 3. Search for the GUID values obtained in step 1
 4. Update the `VersionMajor` and `VersionMinor` values in the `PowerPointLib.csproj` file based on the version information obtained in step 1
